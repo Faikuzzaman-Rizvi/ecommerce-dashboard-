@@ -11,10 +11,25 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('products_reviews', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
-        });
+   Schema::create('products_reviews', function (Blueprint $table) {
+       $table->id();
+       $table->string('description', 1000);
+       $table->string('email', 50);
+
+       $table->unsignedBigInteger('product_id');
+       $table->foreign('email')->references('email')->on('profiles')
+       ->onUpdate('cascade')
+       ->onDelete('restrict');
+       $table->foreign('product_id')
+             ->references('id')
+             ->on('products')
+             ->onUpdate('cascade')
+             ->onDelete('restrict');
+
+
+       $table->timestamps();
+   });
+
     }
 
     /**

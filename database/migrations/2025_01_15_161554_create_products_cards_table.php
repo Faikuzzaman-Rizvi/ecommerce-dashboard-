@@ -13,6 +13,16 @@ return new class extends Migration
     {
         Schema::create('products_cards', function (Blueprint $table) {
             $table->id();
+            $table->string('email',50);
+            $table->unsignedBigInteger('product_id');
+            $table->string('color',200);
+            $table->string('size', 200);
+
+            $table->foreign('email')->references('email')->on('profiles')->onUpdate('cascade')
+            ->onDelete('restrict');
+            $table->foreign('product_id')->references('id')->on('products')->onUpdate('cascade')
+            ->onDelete('restrict');
+
             $table->timestamps();
         });
     }
