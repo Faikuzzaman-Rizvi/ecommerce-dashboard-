@@ -1,12 +1,13 @@
 <?php
 
 use App\Http\Controllers\DemoController;
+use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Middleware\DemoMiddleware;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('dashboard.index');
 });
 
 Route::get('/dashboard', function () {
@@ -21,22 +22,12 @@ Route::middleware('auth')->group(function () {
 
 require __DIR__.'/auth.php';
 
-// Route::get('/hello', [DemoController::class, 'action']);
-// Route::get('/hello/{name}', [DemoController::class, 'action']);
-// Route::get('/hello/{name}/{age}', [DemoController::class, 'action']);
-// Route::get('/hello1/{key}', [DemoController::class, 'DemoAction1'])->middleware([DemoMiddleware::class]);
-// Route::get('/hello2/{key}', [DemoController::class, 'DemoAction2'])->middleware([DemoMiddleware::class]);
-// Route::get('/hello3/{key}', [DemoController::class, 'DemoAction3'])->middleware([DemoMiddleware::class]);
-// Route::get('/hello4/{key}', [DemoController::class, 'DemoAction4'])->middleware([DemoMiddleware::class]);
-// Route::get('/hello2', [DemoController::class, 'DemoAction2']);
 
-
-Route::middleware(["demo"])->group(function(){
-
-    Route::get('/hello1/{key}', [DemoController::class, 'DemoAction1']);
-    Route::get('/hello2/{key}', [DemoController::class, 'DemoAction2']);
-    Route::get('/hello3/{key}', [DemoController::class, 'DemoAction3']);
-    Route::get('/hello4/{key}', [DemoController::class, 'DemoAction4']);
-    
+Route::prefix('product')->group(function () {
+    Route::get('/', [ProductController::class,'index'])->name('product.index');
+    Route::get('/create', [ProductController::class, 'create'])->name('product.create');
+    // Route::post('/store', [ProductController::class, 'store']);
+    // Route::get('/edit/{id}', [ProductController::class, 'edit']);
+    // Route::post('/update/{id}', [ProductController::class, 'update']);
+    // Route::get('/delete/{id}', [ProductController::class, 'destroy']);
 });
-
