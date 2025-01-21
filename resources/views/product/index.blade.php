@@ -10,7 +10,7 @@
                         <a href="" class="btn btn-dark m-3 px-4">
                             <i class="fas fa-plus"></i> Add Category
                         </a>
-                        <a href="{{ route('product.create') }}" class="btn btn-dark m-3 px-4">
+                        <a href="{{ route('products.create') }}" class="btn btn-dark m-3 px-4">
                             <i class="fas fa-plus"></i> Add Product
                         </a>
                     </div>
