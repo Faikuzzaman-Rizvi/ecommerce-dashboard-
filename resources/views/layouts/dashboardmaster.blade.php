@@ -22,6 +22,8 @@
 	<link rel="stylesheet" href="{{ asset('dashboard') }}/assets/css/bootstrap.min.css" />
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600&amp;family=Roboto&amp;display=swap" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 	<!-- Icons CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -30,6 +32,17 @@
 	<link rel="stylesheet" href="{{ asset('dashboard') }}/assets/css/app.css" />
 	<link rel="stylesheet" href="{{ asset('dashboard') }}/assets/css/dark-sidebar.css" />
 	<link rel="stylesheet" href="{{ asset('dashboard') }}/assets/css/dark-theme.css" />
+     <!-- SunEditor CSS -->
+     <link href="https://cdn.jsdelivr.net/npm/suneditor@2.40.0/dist/css/suneditor.min.css" rel="stylesheet">
+     <style>
+         .drop-zone {
+             height: 200px;
+             border: 2px dashed #007bff;
+             padding: 100px;
+             text-align: center;
+             margin-bottom: 15px;
+         }
+     </style>
 </head>
 
 <body>
@@ -630,6 +643,33 @@
 	<script src="{{ asset('dashboard') }}/assets/js/index2.js"></script>
 	<!-- App JS -->
 	<script src="{{ asset('dashboard') }}/assets/js/app.js"></script>
+    <!-- Bootstrap and SunEditor JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/suneditor@2.40.0/dist/suneditor.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.bundle.min.js"></script>
+
+
+    <script>
+        // Initialize SunEditor for Description Field
+        const editor = SUNEDITOR.create('description', {
+            width: '100%',
+            height: '300px'
+        });
+
+        // Handle File Drop and Select
+        document.querySelector('.drop-zone').addEventListener('click', function() {
+            document.getElementById('product_image').click();
+        });
+
+        function handleFileSelect(event) {
+            const file = event.target.files[0];
+            if (file) {
+                alert('File selected: ' + file.name);
+            }
+        }
+    </script>
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 
 </body>
 

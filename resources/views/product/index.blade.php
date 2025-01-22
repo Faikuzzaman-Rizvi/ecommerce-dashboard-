@@ -7,10 +7,10 @@
             <div class="card-body">
                 <div>
                     <div class="d-flex justify-content-end">
-                        <a href="" class="btn btn-dark m-3 px-4">
+                        <a href="#" class="btn btn-primary m-3 px-4" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
                             <i class="fas fa-plus"></i> Add Category
                         </a>
-                        <a href="{{ route('products.create') }}" class="btn btn-dark m-3 px-4">
+                        <a href="{{ route('products.create') }}" class="btn btn-primary m-3 px-4">
                             <i class="fas fa-plus"></i> Add Product
                         </a>
                     </div>
@@ -113,4 +113,41 @@
     </div>
 </div>
 
+<!-- Add Category Modal -->
+<div class="modal fade" style="background-color:#6c757d02,opacity: 0.11;" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="staticBackdropLabel">Add Category</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <!-- Form to add category -->
+          <form action="" method="POST">
+            @csrf
+            <div class="mb-3">
+                <label for="categoryName" class="form-label">Category Name</label>
+                <input type="text" class="form-control" id="categoryName" name="name" required>
+            </div>
+            <div class="mb-3">
+                <label for="categoryDescription" class="form-label">Description</label>
+                <textarea class="form-control" id="categoryDescription" name="description" rows="3" required></textarea>
+            </div>
+            <div class="mb-3">
+                <label for="categoryStatus" class="form-label">Status</label>
+                <select class="form-select" id="categoryStatus" name="status" required>
+                    <option value="active">Active</option>
+                    <option value="inactive">Inactive</option>
+                </select>
+            </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary">Add Category</button>
+            </div>
+            </form>
+        </div>
+      </div>
+    </div>
+  </div>
 @endsection
