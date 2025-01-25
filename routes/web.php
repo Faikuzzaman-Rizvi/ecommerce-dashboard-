@@ -3,6 +3,7 @@
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\BrandController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -49,33 +50,33 @@ Route::middleware(['auth'])->prefix('admin')->group(function () {
     Route::prefix('categories')->group(function () {
         Route::get('/', [CategoryController::class, 'index'])->name('categories.index');
         Route::get('/create', [CategoryController::class, 'create'])->name('categories.create');
-        // Route::post('/', [CategoryController::class, 'store'])->name('categories.store');
-        // Route::get('/{category}', [CategoryController::class, 'show'])->name('categories.show');
-        // Route::get('/{category}/edit', [CategoryController::class, 'edit'])->name('categories.edit');
-        // Route::put('/{category}', [CategoryController::class, 'update'])->name('categories.update');
-        // Route::delete('/{category}', [CategoryController::class, 'destroy'])->name('categories.destroy');
+        Route::post('/', [CategoryController::class, 'store'])->name('categories.store');
+        Route::get('/{category}', [CategoryController::class, 'show'])->name('categories.show');
+        Route::get('/{category}/edit', [CategoryController::class, 'edit'])->name('categories.edit');
+        Route::put('/{category}', [CategoryController::class, 'update'])->name('categories.update');
+        Route::delete('/{category}', [CategoryController::class, 'destroy'])->name('categories.destroy');
     });
 
     // Brands
-    // Route::prefix('brands')->group(function () {
-    //     Route::get('/', [BrandController::class, 'index'])->name('brands.index');
-    //     Route::get('/create', [BrandController::class, 'create'])->name('brands.create');
-    //     Route::post('/', [BrandController::class, 'store'])->name('brands.store');
-    //     Route::get('/{brand}', [BrandController::class, 'show'])->name('brands.show');
-    //     Route::get('/{brand}/edit', [BrandController::class, 'edit'])->name('brands.edit');
-    //     Route::put('/{brand}', [BrandController::class, 'update'])->name('brands.update');
-    //     Route::delete('/{brand}', [BrandController::class, 'destroy'])->name('brands.destroy');
-    // });
+    Route::prefix('brands')->group(function () {
+        Route::get('/', [BrandController::class, 'index'])->name('brands.index');
+        Route::get('/create', [BrandController::class, 'create'])->name('brands.create');
+        Route::post('/', [BrandController::class, 'store'])->name('brands.store');
+        Route::get('/{brand}', [BrandController::class, 'show'])->name('brands.show');
+        Route::get('/{brand}/edit', [BrandController::class, 'edit'])->name('brands.edit');
+        Route::put('/{brand}', [BrandController::class, 'update'])->name('brands.update');
+        Route::delete('/{brand}', [BrandController::class, 'destroy'])->name('brands.destroy');
+    });
 
     // Products
     Route::prefix('products')->group(function () {
         Route::get('/', [ProductController::class, 'index'])->name('products.index');
         Route::get('/create', [ProductController::class, 'create'])->name('products.create');
-        // Route::post('/', [ProductController::class, 'store'])->name('products.store');
-        // Route::get('/{product}', [ProductController::class, 'show'])->name('products.show');
-        // Route::get('/{product}/edit', [ProductController::class, 'edit'])->name('products.edit');
-        // Route::put('/{product}', [ProductController::class, 'update'])->name('products.update');
-        // Route::delete('/{product}', [ProductController::class, 'destroy'])->name('products.destroy');
+        Route::post('/', [ProductController::class, 'store'])->name('products.store');
+        Route::get('/{product}', [ProductController::class, 'show'])->name('products.show');
+        Route::get('/{product}/edit', [ProductController::class, 'edit'])->name('products.edit');
+        Route::put('/{product}', [ProductController::class, 'update'])->name('products.update');
+        Route::delete('/{product}', [ProductController::class, 'destroy'])->name('products.destroy');
     });
 
     // Product Reviews

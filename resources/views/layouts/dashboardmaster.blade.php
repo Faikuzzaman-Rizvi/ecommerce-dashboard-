@@ -83,6 +83,20 @@
 						<div class="menu-title">product</div>
 					</a>
 				</li>
+				<li>
+					<a href="{{route('categories.index')}}">
+						<div class="parent-icon icon-color-2"><i class='bx bxs-basket'></i>
+						</div>
+						<div class="menu-title">Category</div>
+					</a>
+				</li>
+				<li>
+					<a href="{{route('brands.index')}}">
+						<div class="parent-icon icon-color-3"><i class='bx bxs-basket'></i>
+						</div>
+						<div class="menu-title">Brand</div>
+					</a>
+				</li>
 				<li class="menu-label">Pages</li>
 				<li>
 					<a class="has-arrow" href="javascript:;">

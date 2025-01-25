@@ -1,12 +1,4 @@
-
 /*
-Template Name: Syndash Admin
-Author: codervent
-Email: codervent@gmail.com
-File: app.css
-*/
-
-/*  
   - Google Font
   - General
   - Header
@@ -51,7 +43,7 @@ body {
 	letter-spacing: .1px;
 
 	font-size: 14px;
-	
+
 	overflow-x:hidden
 
 }
@@ -164,7 +156,7 @@ a:hover {
 .logo-icon-2 {
 
 	width: 35px;
-	
+
 	margin-left: 10px;
 
 }
@@ -282,7 +274,7 @@ a:hover {
     padding: 0 14px;
 
     border-radius: 0px;
-	
+
     height: calc(1.6em + 0.75rem + 2px);
 
 }
@@ -1271,7 +1263,7 @@ sup {
 		display: none;
 
 	}
-	
+
 	.wrapper.toggled:not(.sidebar-hovered) .sidebar-wrapper .sidebar-header .logo-icon-2 {
 
 		margin-left: 0px;
@@ -1330,7 +1322,7 @@ sup {
 
 	.wrapper.toggled:not(.sidebar-hovered) .sidebar-wrapper .metismenu .has-arrow:after {
 
-		display: none;
+		display: none !important;
 
 	}
 
