@@ -22,7 +22,7 @@
                             <form action="{{ route('products.index') }}" method="GET" class="d-flex gap-2">
                                 <div class="input-group">
                                     <input type="text" name="search" class="form-control"
-                                           placeholder="Search by title, price, category, or brand..."
+                                           placeholder="Search by id,title, price, category, or brand..."
                                            value="{{ request('search') }}">
                                     <button class="btn btn-primary" type="submit">
                                         <i class="bx bx-search"></i> Search
@@ -47,7 +47,7 @@
                                     @foreach($brands as $brand)
                                         <option value="{{ $brand->id }}"
                                             {{ request('brand') == $brand->id ? 'selected' : '' }}>
-                                            {{ $brand->name }}
+                                            {{ $brand->brandName }}
                                         </option>
                                     @endforeach
                                 </select>
@@ -124,8 +124,8 @@
                                         <td>
                                             <span class="badge bg-info">{{ $product->remark }}</span>
                                         </td>
-                                        <td>{{ $product->category->name ?? 'N/A' }}</td>
-                                        <td>{{ $product->brand->name ?? 'N/A' }}</td>
+                                        <td>{{ $product->category?->categoryName ?? 'N/A' }}</td>
+                                        <td>{{ $product->brand?->brandName ?? 'N/A' }}</td>
                                         <td>
                                             <div class="btn-group" role="group">
                                                 <a href="{{ route('products.show', $product->id) }}"

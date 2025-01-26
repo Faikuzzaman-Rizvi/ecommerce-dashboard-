@@ -19,38 +19,40 @@ class ProductController extends Controller
 
         // Search functionality
         if ($request->filled('search')) {
-            $search = $request->search;
-            $query->where(function($q) use ($search) {
-                $q->where('title', 'like', "%{$search}%")
-                  ->orWhere('price', 'like', "%{$search}%")
-                  ->orWhere('short_des', 'like', "%{$search}%")
+            $search = trim($request->search);
+            $searchLike = "{$search}%";
+
+            $query->where(function($q) use ($search, $searchLike) {
+                $q->where('id', 'LIKE', $search)  // Search by ID (exact match)
+                  ->orWhereRaw('LOWER(title) LIKE ?', ["%".strtolower($search)."%"])
+                  ->orWhere('price', 'LIKE', "%{$search}%")
                   ->orWhereHas('category', function($q) use ($search) {
-                      $q->where('name', 'like', "%{$search}%");
+                      $q->whereRaw('LOWER(categoryName) LIKE ?', ["%".strtolower($search)."%"]);
                   })
                   ->orWhereHas('brand', function($q) use ($search) {
-                      $q->where('name', 'like', "%{$search}%");
+                      $q->whereRaw('LOWER(brandName) LIKE ?', ["%".strtolower($search)."%"]);
                   });
             });
         }
 
-        // Category filter
+        // Filter by category
         if ($request->filled('category')) {
             $query->where('category_id', $request->category);
         }
 
-        // Brand filter
+        // Filter by brand
         if ($request->filled('brand')) {
             $query->where('brand_id', $request->brand);
         }
 
-        // Remark filter
+        // Filter by remark
         if ($request->filled('remark')) {
             $query->where('remark', $request->remark);
         }
 
-        $products = $query->latest()->paginate(10);
         $categories = Category::all();
         $brands = Brand::all();
+        $products = $query->paginate(10);
 
         return view('product.index', compact('products', 'categories', 'brands'));
     }
@@ -91,7 +93,7 @@ class ProductController extends Controller
 
         Product::create($validated);
 
-        return redirect()->route('product.index')
+        return redirect()->route('products.index')
             ->with('success', 'Product created successfully.');
     }
 
@@ -148,7 +150,7 @@ class ProductController extends Controller
 
         $product->update($validated);
 
-        return redirect()->route('product.index')
+        return redirect()->route('products.index')
             ->with('success', 'Product updated successfully.');
     }
 
@@ -166,7 +168,7 @@ class ProductController extends Controller
 
         $product->delete();
 
-        return redirect()->route('product.index')
+        return redirect()->route('products.index')
             ->with('success', 'Product deleted successfully.');
     }
 }

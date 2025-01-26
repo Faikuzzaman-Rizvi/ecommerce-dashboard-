@@ -18,15 +18,17 @@
                 <div class="card-body">
                     <div class="row">
                         <!-- Category Image -->
-                        <div class="col-md-4">
+                        <div class="col-md-4 text-center mb-4">
                             @if($category->categoryImg)
-                                <img src="{{ asset('storage/' . $category->categoryImg) }}"
+                                <img src="{{ asset("storage/{$category->categoryImg}") }}"
                                      alt="{{ $category->categoryName }}"
-                                     class="img-fluid rounded">
+                                     class="img-fluid rounded shadow-sm"
+                                     style="max-height: 200px; object-fit: cover;">
                             @else
-                                <div class="text-center p-4 bg-light">
-                                    <span class="text-muted">No image available</span>
-                                </div>
+                            <div class="border rounded p-4">
+                                <i class="bx bx-image text-muted" style="font-size: 100px;"></i>
+                                <p class="text-muted">No image available</p>
+                            </div>
                             @endif
                         </div>
 
@@ -59,42 +61,71 @@
 
                     <!-- Products List -->
                     @if($category->products->count() > 0)
-                        <div class="mt-4">
-                            <h4>Products in this Category</h4>
-                            <div class="table-responsive">
-                                <table class="table table-striped">
-                                    <thead>
-                                        <tr>
-                                            <th>Image</th>
-                                            <th>Name</th>
-                                            <th>Price</th>
-                                            <th>Status</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        @foreach($category->products as $product)
+                        <div class="row mt-4">
+                            <div class="col-12">
+                                <h5 class="mb-3">Products in this Category</h5>
+                                <div class="table-responsive">
+                                    <table class="table table-striped table-bordered">
+                                        <thead>
                                             <tr>
-                                                <td>
-                                                    @if($product->image)
-                                                        <img src="{{ asset('storage/' . $product->image) }}"
+                                                <th>Image</th>
+                                                <th>Title</th>
+                                                <th>Price</th>
+                                                <th>Stock</th>
+                                                <th>Category</th>
+                                                <th>Brand</th>
+                                                <th>Remark</th>
+                                                <th>Actions</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @forelse($category->products as $product)
+                                                <tr>
+                                                    <td>
+                                                        <img src="{{ asset("storage/{$product->image}") }}"
                                                              alt="{{ $product->title }}"
                                                              class="img-thumbnail"
                                                              style="height: 50px; width: 50px; object-fit: cover;">
-                                                    @endif
-                                                </td>
-                                                <td>{{ $product->title }}</td>
-                                                <td>${{ $product->price }}</td>
-                                                <td>
-                                                    @if($product->stock)
-                                                        <span class="badge bg-success">In Stock</span>
-                                                    @else
-                                                        <span class="badge bg-danger">Out of Stock</span>
-                                                    @endif
-                                                </td>
-                                            </tr>
-                                        @endforeach
-                                    </tbody>
-                                </table>
+                                                    </td>
+                                                    <td>
+                                                        {{ $product->title }}
+                                                        <div class="small text-muted">{{ Str::limit($product->short_des, 50) }}</div>
+                                                    </td>
+                                                    <td>
+                                                        ${{ $product->price }}
+                                                        @if($product->discount)
+                                                            <div class="small text-success">
+                                                                Discount: ${{ $product->discount_price }}
+                                                            </div>
+                                                        @endif
+                                                    </td>
+                                                    <td>
+                                                        @if($product->stock)
+                                                            <span class="badge bg-success">In Stock</span>
+                                                        @else
+                                                            <span class="badge bg-danger">Out of Stock</span>
+                                                        @endif
+                                                    </td>
+                                                    <td>{{ $product->category->categoryName }}</td>
+                                                    <td>{{ $product->brand->brandName }}</td>
+                                                    <td>
+                                                        <span class="badge bg-info">{{ ucfirst($product->remark) }}</span>
+                                                    </td>
+                                                    <td>
+                                                        <a href="{{ route('products.show', $product->id) }}"
+                                                           class="btn btn-info btn-sm">
+                                                            <i class="bx bx-show"></i>
+                                                        </a>
+                                                    </td>
+                                                </tr>
+                                            @empty
+                                                <tr>
+                                                    <td colspan="7" class="text-center">No products found in this brands.</td>
+                                                </tr>
+                                            @endforelse
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
                         </div>
                     @endif

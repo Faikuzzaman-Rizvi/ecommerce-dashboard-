@@ -55,7 +55,7 @@ class CategoryController extends Controller
 
             $category->save();
 
-            return redirect()->route('category.index')
+            return redirect()->route('categories.index')
                 ->with('success', 'Category created successfully!');
 
         } catch (\Exception $e) {

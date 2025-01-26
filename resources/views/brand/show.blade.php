@@ -19,9 +19,9 @@
                     <div class="row">
                         <!-- Brand Image -->
                         <div class="col-md-4 text-center mb-4">
-                            @if($brand->img)
-                                <img src="{{ asset('storage/'.$brand->img) }}"
-                                     alt="{{ $brand->name }}"
+                            @if($brand->brandImg)
+                                <img src="{{ asset("storage/{$brand->brandImg}") }}"
+                                     alt="{{ $brand->brandName }}"
                                      class="img-fluid rounded shadow-sm"
                                      style="max-height: 200px; object-fit: cover;">
                             @else
@@ -39,7 +39,7 @@
                                     <tbody>
                                         <tr>
                                             <th style="width: 200px;">Brand Name</th>
-                                            <td>{{ $brand->name }}</td>
+                                            <td>{{ $brand->brandName }}</td>
                                         </tr>
                                         <tr>
                                             <th>Total Products</th>
@@ -72,6 +72,7 @@
                                             <th>Price</th>
                                             <th>Stock</th>
                                             <th>Category</th>
+                                            <th>Brand</th>
                                             <th>Remark</th>
                                             <th>Actions</th>
                                         </tr>
@@ -80,7 +81,7 @@
                                         @forelse($brand->products as $product)
                                             <tr>
                                                 <td>
-                                                    <img src="{{ asset('storage/'.$product->image) }}"
+                                                    <img src="{{ asset("storage/{$product->image}") }}"
                                                          alt="{{ $product->title }}"
                                                          class="img-thumbnail"
                                                          style="height: 50px; width: 50px; object-fit: cover;">
@@ -104,12 +105,13 @@
                                                         <span class="badge bg-danger">Out of Stock</span>
                                                     @endif
                                                 </td>
-                                                <td>{{ $product->category->name }}</td>
+                                                <td>{{ $product->category->categoryName }}</td>
+                                                <td>{{ $product->brand->brandName }}</td>
                                                 <td>
                                                     <span class="badge bg-info">{{ ucfirst($product->remark) }}</span>
                                                 </td>
                                                 <td>
-                                                    <a href="{{ route('product.show', $product->id) }}"
+                                                    <a href="{{ route('products.show', $product->id) }}"
                                                        class="btn btn-info btn-sm">
                                                         <i class="bx bx-show"></i>
                                                     </a>
