@@ -108,7 +108,7 @@ class BrandController extends Controller
         $brand->update($validated);
 
         return redirect()
-            ->route('brand.index')
+            ->route('brands.index')
             ->with('success', 'Brand updated successfully.');
     }
 
@@ -122,7 +122,7 @@ class BrandController extends Controller
         // Check if brand has associated products
         if ($brand->products_count > 0) {
             return redirect()
-                ->route('brand.index')
+                ->route('brands.index')
                 ->with('error', 'Cannot delete brand with associated products.');
         }
 
@@ -134,7 +134,7 @@ class BrandController extends Controller
         $brand->delete();
 
         return redirect()
-            ->route('brand.index')
+            ->route('brands.index')
             ->with('success', 'Brand deleted successfully.');
     }
 }

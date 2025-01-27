@@ -87,27 +87,30 @@
                                         </td>
                                         <td>{{ $category->created_at->format('Y-m-d H:i:s') }}</td>
                                         <td>
-                                            <div class="btn-group" role="group">
+                                            <div class="d-flex gap-1">
                                                 <a href="{{ route('categories.show', $category->id) }}"
-                                                   class="btn btn-sm btn-info">
+                                                   class="btn btn-info btn-sm"
+                                                   title="View">
                                                     <i class="fas fa-eye"></i>
                                                 </a>
                                                 <a href="{{ route('categories.edit', $category->id) }}"
-                                                   class="btn btn-sm btn-primary">
+                                                   class="btn btn-warning btn-sm"
+                                                   title="Edit">
                                                     <i class="fas fa-edit"></i>
                                                 </a>
-                                                @if($category->products_count == 0)
-                                                    <form action="{{ route('categories.destroy', $category->id) }}"
-                                                          method="POST"
-                                                          class="d-inline"
-                                                          onsubmit="return confirm('Are you sure you want to delete this category?');">
-                                                        @csrf
-                                                        @method('DELETE')
-                                                        <button type="submit" class="btn btn-sm btn-danger">
-                                                            <i class="fas fa-trash"></i>
-                                                        </button>
-                                                    </form>
-                                                @endif
+                                                <form action="{{ route('categories.destroy', $category->id) }}"
+                                                      method="POST"
+                                                      class="d-inline"
+                                                      onsubmit="return confirm('Are you sure you want to delete this category?');">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="submit"
+                                                            class="btn btn-danger btn-sm"
+                                                            title="{{ $category->products_count > 0 ? 'Cannot delete category with products' : 'Delete category' }}"
+                                                            {{ $category->products_count > 0 ? 'disabled' : '' }}>
+                                                        <i class="fas fa-trash"></i>
+                                                    </button>
+                                                </form>
                                             </div>
                                         </td>
                                     </tr>

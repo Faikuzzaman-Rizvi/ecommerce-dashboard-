@@ -127,7 +127,7 @@
                                         <td>{{ $product->category?->categoryName ?? 'N/A' }}</td>
                                         <td>{{ $product->brand?->brandName ?? 'N/A' }}</td>
                                         <td>
-                                            <div class="btn-group" role="group">
+                                            <div class="d-flex gap-1" role="group">
                                                 <a href="{{ route('products.show', $product->id) }}"
                                                    class="btn btn-info btn-sm">
                                                     <i class="bx bx-show"></i>

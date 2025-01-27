@@ -133,26 +133,28 @@ class CategoryController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Category $category)
     {
-        $category = Category::withCount('products')->findOrFail($id);
+        try {
+            // Check if category has products
+            if ($category->products_count > 0) {
+                return redirect()->back()
+                    ->with('error', 'Cannot delete category that has products.');
+            }
 
-        // Check if category has associated products
-        if ($category->products_count > 0) {
-            return redirect()
-                ->route('categories.index')
-                ->with('error', 'Cannot delete category with associated products.');
+            // Delete the category image if it exists
+            if ($category->categoryImg) {
+                Storage::delete('public/' . $category->categoryImg);
+            }
+
+            // Delete the category
+            $category->delete();
+
+            return redirect()->route('categories.index')
+                ->with('success', 'Category deleted successfully.');
+        } catch (\Exception $e) {
+            return redirect()->back()
+                ->with('error', 'Error deleting category: ' . $e->getMessage());
         }
-
-        // Delete category image if exists
-        if ($category->img) {
-            Storage::disk('public')->delete($category->img);
-        }
-
-        $category->delete();
-
-        return redirect()
-            ->route('categories.index')
-            ->with('success', 'Category deleted successfully.');
     }
 }

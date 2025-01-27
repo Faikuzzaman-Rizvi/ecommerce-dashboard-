@@ -22,6 +22,9 @@ class Category extends Model
     // Ensure column names match exactly
     protected $table = 'categories';
 
+    // Add this if you want to eager load the products count
+    protected $withCount = ['products'];
+
     /**
      * Get the products for the category.
      */

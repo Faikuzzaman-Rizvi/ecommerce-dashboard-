@@ -69,13 +69,13 @@
                                         </td>
                                         <td>{{ $brand->created_at->format('Y-m-d H:i:s') }}</td>
                                         <td>
-                                            <div class="btn-group" role="group">
+                                            <div class="d-flex gap-1" role="group">
                                                 <a href="{{ route('brands.show', $brand->id) }}"
-                                                   class="btn btn-sm btn-info">
+                                                   class="btn btn-info btn-sm">
                                                     <i class="fas fa-eye"></i>
                                                 </a>
                                                 <a href="{{ route('brands.edit', $brand->id) }}"
-                                                   class="btn btn-sm btn-primary">
+                                                   class="btn btn-warning btn-sm">
                                                     <i class="fas fa-edit"></i>
                                                 </a>
                                                 <form action="{{ route('brands.destroy', $brand->id) }}"
@@ -84,7 +84,10 @@
                                                       onsubmit="return confirm('Are you sure you want to delete this brand?');">
                                                     @csrf
                                                     @method('DELETE')
-                                                    <button type="submit" class="btn btn-sm btn-danger">
+                                                    <button type="submit"
+                                                            class="btn btn-danger btn-sm"
+                                                            title="{{ $brand->products_count > 0 ? 'Cannot delete brand with products' : 'Delete brand' }}"
+                                                            {{ $brand->products_count > 0 ? 'disabled' : '' }}>
                                                         <i class="fas fa-trash"></i>
                                                     </button>
                                                 </form>
